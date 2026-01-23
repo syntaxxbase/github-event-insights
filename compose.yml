@@ -1,0 +1,83 @@
+services:
+  db:
+    image: postgres:16-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: active_storage_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/rails
+    ports:
+      - "3000:3000"
+    environment:
+      RAILS_ENV: development
+      DATABASE_URL: postgres://postgres:password@db:5432/active_storage_db
+      REDIS_URL: redis://redis:6379/1
+    depends_on:
+      - db
+      - redis
+    stdin_open: true
+    tty: true
+
+  sidekiq:
+    build: .
+    command: bundle exec sidekiq
+    volumes:
+      - .:/rails
+    environment:
+      RAILS_ENV: development
+      DATABASE_URL: postgres://postgres:password@db:5432/active_storage_db
+      REDIS_URL: redis://redis:6379/1
+    depends_on:
+      - db
+      - redis
+
+  # One-off ingestion task runner
+  ingest:
+    build: .
+    command: bundle exec rails runner IngestionJob.perform_now
+    volumes:
+      - .:/rails
+    environment:
+      RAILS_ENV: development
+      DATABASE_URL: postgres://postgres:password@db:5432/active_storage_db
+      REDIS_URL: redis://redis:6379/1
+    depends_on:
+      - db
+      - redis
+    profiles:
+      - tasks
+
+  test:
+    build: .
+    command: bundle exec rspec
+    volumes:
+      - .:/rails
+    environment:
+      RAILS_ENV: test
+      DATABASE_URL: postgres://postgres:password@db:5432/active_storage_test
+      REDIS_URL: redis://redis:6379/1
+    depends_on:
+      - db
+      - redis
+    profiles:
+      - tasks
+
+volumes:
+  postgres_data:
+  redis_data:

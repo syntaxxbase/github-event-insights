@@ -1,0 +1,971 @@
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Performing IngestionJob (Job ID: 7c48ab61-8c84-43aa-a3d4-892800ebc73b) from Async(default)
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Starting GitHub Event Ingestion...
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Found 29 PushEvents out of 30 total events.
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414613"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.3ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "41898282"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "41898282"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (3.5ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "41898282"], ["login", "github-actions[bot]"], ["details", "{}"], ["created_at", "2026-01-23 12:00:49.964942"], ["updated_at", "2026-01-23 12:00:49.964942"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: ef553d14-77a2-4b18-bcfe-d72f842c5885) to Async(default) with arguments: :actor, 1
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.4ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "706781544"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [EnrichmentJob] [ef553d14-77a2-4b18-bcfe-d72f842c5885] Performing EnrichmentJob (Job ID: ef553d14-77a2-4b18-bcfe-d72f842c5885) from Async(default) enqueued at 2026-01-23T12:00:49.981736211Z with arguments: :actor, 1
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "706781544"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.3ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "706781544"], ["name", "smarthomefans01/hadownloadtool"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.010056"], ["updated_at", "2026-01-23 12:00:50.010056"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: b7c48240-dd05-418e-ab28-3a698b3bf2ed) to Async(default) with arguments: :repository, 1
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414613"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [EnrichmentJob] [b7c48240-dd05-418e-ab28-3a698b3bf2ed] Performing EnrichmentJob (Job ID: b7c48240-dd05-418e-ab28-3a698b3bf2ed) from Async(default) enqueued at 2026-01-23T12:00:50.012031378Z with arguments: :repository, 1
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.7ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414613"], ["type", "PushEvent"], ["payload", "{\"repository_id\":706781544,\"push_id\":30044834968,\"ref\":\"refs/heads/main\",\"head\":\"4085f4d76d90a50273196f59b1183e78730a527f\",\"before\":\"d91068d46b572ab832da995d5f08b7f962fe0e2f\"}"], ["actor_id", 1], ["repository_id", 1], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.032586"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [EnrichmentJob] [ef553d14-77a2-4b18-bcfe-d72f842c5885]   [1m[36mActor Load (1.4ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[ActiveJob] [EnrichmentJob] [ef553d14-77a2-4b18-bcfe-d72f842c5885]   ↳ app/services/enrichment_service.rb:32:in `find_resource'
+[ActiveJob] [EnrichmentJob] [ef553d14-77a2-4b18-bcfe-d72f842c5885] Performed EnrichmentJob (Job ID: ef553d14-77a2-4b18-bcfe-d72f842c5885) from Async(default) in 45.2ms
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414838"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "78535156"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "78535156"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (0.2ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "78535156"], ["login", "OpaceDigitalAgency"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.040440"], ["updated_at", "2026-01-23 12:00:50.040440"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 161976dd-8865-489a-9177-8e8273b9fbcd) to Async(default) with arguments: :actor, 2
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.2ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1070872158"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1070872158"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.6ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1070872158"], ["name", "OpaceDigitalAgency/smashingappsv2"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.045538"], ["updated_at", "2026-01-23 12:00:50.045538"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 2be2ff32-5e9e-478e-9a67-5aa588237de2) to Async(default) with arguments: :repository, 2
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414838"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.5ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414838"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1070872158,\"push_id\":30044835214,\"ref\":\"refs/heads/main\",\"head\":\"ebb909e47943f77087588c0aefd2213c430cfdb2\",\"before\":\"e993fc46192b3537c10a1b6e2bcc9ae9006be7c9\"}"], ["actor_id", 2], ["repository_id", 2], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.050078"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414634"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.6ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "135825033"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [EnrichmentJob] [161976dd-8865-489a-9177-8e8273b9fbcd] Performing EnrichmentJob (Job ID: 161976dd-8865-489a-9177-8e8273b9fbcd) from Async(default) enqueued at 2026-01-23T12:00:50.041807461Z with arguments: :actor, 2
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [EnrichmentJob] [161976dd-8865-489a-9177-8e8273b9fbcd]   [1m[36mActor Load (1.4ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[ActiveJob] [EnrichmentJob] [161976dd-8865-489a-9177-8e8273b9fbcd]   ↳ app/services/enrichment_service.rb:32:in `find_resource'
+[ActiveJob] [EnrichmentJob] [161976dd-8865-489a-9177-8e8273b9fbcd] Enriching actor 78535156...
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (3.3ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "135825033"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [EnrichmentJob] [b7c48240-dd05-418e-ab28-3a698b3bf2ed]   [1m[36mRepository Load (1.2ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[ActiveJob] [EnrichmentJob] [b7c48240-dd05-418e-ab28-3a698b3bf2ed]   ↳ app/services/enrichment_service.rb:33:in `find_resource'
+[ActiveJob] [EnrichmentJob] [b7c48240-dd05-418e-ab28-3a698b3bf2ed] Enriching repository 706781544...
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (1.7ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "135825033"], ["login", "1enify"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.062022"], ["updated_at", "2026-01-23 12:00:50.062022"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 766b30be-b98b-4ed8-ac5d-e327ebaa95fa) to Async(default) with arguments: :actor, 3
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.6ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1042084371"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1042084371"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.5ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1042084371"], ["name", "1enify/nerimity-web-for-contribs"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.079340"], ["updated_at", "2026-01-23 12:00:50.079340"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [EnrichmentJob] [2be2ff32-5e9e-478e-9a67-5aa588237de2] Performing EnrichmentJob (Job ID: 2be2ff32-5e9e-478e-9a67-5aa588237de2) from Async(default) enqueued at 2026-01-23T12:00:50.047837211Z with arguments: :repository, 2
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: c7ba68f4-7666-4b7e-b9a2-58f94144b0cc) to Async(default) with arguments: :repository, 3
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [EnrichmentJob] [2be2ff32-5e9e-478e-9a67-5aa588237de2]   [1m[36mRepository Load (0.6ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[ActiveJob] [EnrichmentJob] [2be2ff32-5e9e-478e-9a67-5aa588237de2]   ↳ app/services/enrichment_service.rb:33:in `find_resource'
+[ActiveJob] [EnrichmentJob] [2be2ff32-5e9e-478e-9a67-5aa588237de2] Enriching repository 1070872158...
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (2.0ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414634"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (1.4ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414634"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1042084371,\"push_id\":30044834927,\"ref\":\"refs/heads/i18n-2\",\"head\":\"eb94a9a14e3ee0b4e457028c09a9401010db58f7\",\"before\":\"9dccfc45a414f1c217874db9a7010248b2c552f1\"}"], ["actor_id", 3], ["repository_id", 3], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.087163"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414636"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.3ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "141937563"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (2.5ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "141937563"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (0.4ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "141937563"], ["login", "Irsaam1023"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.097227"], ["updated_at", "2026-01-23 12:00:50.097227"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: cdfd8977-0396-4252-9597-86a748dae92a) to Async(default) with arguments: :actor, 4
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [EnrichmentJob] [766b30be-b98b-4ed8-ac5d-e327ebaa95fa] Performing EnrichmentJob (Job ID: 766b30be-b98b-4ed8-ac5d-e327ebaa95fa) from Async(default) enqueued at 2026-01-23T12:00:50.074564378Z with arguments: :actor, 3
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (1.4ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1123636893"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [EnrichmentJob] [766b30be-b98b-4ed8-ac5d-e327ebaa95fa]   [1m[36mActor Load (0.6ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[ActiveJob] [EnrichmentJob] [766b30be-b98b-4ed8-ac5d-e327ebaa95fa]   ↳ app/services/enrichment_service.rb:32:in `find_resource'
+[ActiveJob] [EnrichmentJob] [766b30be-b98b-4ed8-ac5d-e327ebaa95fa] Enriching actor 135825033...
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (2.6ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1123636893"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.6ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1123636893"], ["name", "Irsaam1023/IconicZar"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.106113"], ["updated_at", "2026-01-23 12:00:50.106113"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [EnrichmentJob] [c7ba68f4-7666-4b7e-b9a2-58f94144b0cc] Performing EnrichmentJob (Job ID: c7ba68f4-7666-4b7e-b9a2-58f94144b0cc) from Async(default) enqueued at 2026-01-23T12:00:50.082205003Z with arguments: :repository, 3
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 3f7293f5-e939-4517-8f87-3e4f34c09204) to Async(default) with arguments: :repository, 4
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [EnrichmentJob] [c7ba68f4-7666-4b7e-b9a2-58f94144b0cc]   [1m[36mRepository Load (0.3ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[ActiveJob] [EnrichmentJob] [c7ba68f4-7666-4b7e-b9a2-58f94144b0cc]   ↳ app/services/enrichment_service.rb:33:in `find_resource'
+[ActiveJob] [EnrichmentJob] [c7ba68f4-7666-4b7e-b9a2-58f94144b0cc] Enriching repository 1042084371...
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (2.2ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414636"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.7ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414636"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1123636893,\"push_id\":30044834933,\"ref\":\"refs/heads/main\",\"head\":\"ec4cc2e3c63d3aac749d951acc193291240de236\",\"before\":\"ae6a2b9b82299cbb278e77708795b0392643f430\"}"], ["actor_id", 4], ["repository_id", 4], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.114270"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414642"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.3ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "118094258"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (2.3ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "118094258"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (0.4ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "118094258"], ["login", "archijain23"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.123621"], ["updated_at", "2026-01-23 12:00:50.123621"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [EnrichmentJob] [cdfd8977-0396-4252-9597-86a748dae92a] Performing EnrichmentJob (Job ID: cdfd8977-0396-4252-9597-86a748dae92a) from Async(default) enqueued at 2026-01-23T12:00:50.099594878Z with arguments: :actor, 4
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 77110672-a1cc-4ba1-b2b0-1731ed517e1b) to Async(default) with arguments: :actor, 5
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [EnrichmentJob] [cdfd8977-0396-4252-9597-86a748dae92a]   [1m[36mActor Load (0.2ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[ActiveJob] [EnrichmentJob] [cdfd8977-0396-4252-9597-86a748dae92a]   ↳ app/services/enrichment_service.rb:32:in `find_resource'
+[ActiveJob] [EnrichmentJob] [cdfd8977-0396-4252-9597-86a748dae92a] Enriching actor 141937563...
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (1.3ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1085859129"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (2.0ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1085859129"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.5ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1085859129"], ["name", "shreephalhandicraft/shreephal-handicrafts"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.132159"], ["updated_at", "2026-01-23 12:00:50.132159"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: e2477bfa-2e70-4411-8054-3203199b5820) to Async(default) with arguments: :repository, 5
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [EnrichmentJob] [3f7293f5-e939-4517-8f87-3e4f34c09204] Performing EnrichmentJob (Job ID: 3f7293f5-e939-4517-8f87-3e4f34c09204) from Async(default) enqueued at 2026-01-23T12:00:50.109878711Z with arguments: :repository, 4
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414642"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [EnrichmentJob] [3f7293f5-e939-4517-8f87-3e4f34c09204]   [1m[36mRepository Load (1.2ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[ActiveJob] [EnrichmentJob] [3f7293f5-e939-4517-8f87-3e4f34c09204]   ↳ app/services/enrichment_service.rb:33:in `find_resource'
+[ActiveJob] [EnrichmentJob] [3f7293f5-e939-4517-8f87-3e4f34c09204] Enriching repository 1123636893...
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (1.5ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414642"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1085859129,\"push_id\":30044835020,\"ref\":\"refs/heads/fix/phase1-authentication\",\"head\":\"2f130d719286edda0552d853212597bd3d86ee1c\",\"before\":\"8f4e74605e30995739db100c07c5d51fa201e027\"}"], ["actor_id", 5], ["repository_id", 5], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.137595"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414644"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [EnrichmentJob] [77110672-a1cc-4ba1-b2b0-1731ed517e1b] Performing EnrichmentJob (Job ID: 77110672-a1cc-4ba1-b2b0-1731ed517e1b) from Async(default) enqueued at 2026-01-23T12:00:50.126111420Z with arguments: :actor, 5
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.3ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "255495051"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [EnrichmentJob] [77110672-a1cc-4ba1-b2b0-1731ed517e1b]   [1m[36mActor Load (0.3ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[ActiveJob] [EnrichmentJob] [77110672-a1cc-4ba1-b2b0-1731ed517e1b]   ↳ app/services/enrichment_service.rb:32:in `find_resource'
+[ActiveJob] [EnrichmentJob] [77110672-a1cc-4ba1-b2b0-1731ed517e1b] Enriching actor 118094258...
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "255495051"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (0.2ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "255495051"], ["login", "kamlove77"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.153701"], ["updated_at", "2026-01-23 12:00:50.153701"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 0c15feb5-c694-4589-9468-28d14b65b393) to Async(default) with arguments: :actor, 6
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1136180353"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1136180353"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.2ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1136180353"], ["name", "kamlove77/card-ment-ai"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.158211"], ["updated_at", "2026-01-23 12:00:50.158211"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 4a41f5aa-e0dd-4632-9e4d-da80b822d07f) to Async(default) with arguments: :repository, 6
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414644"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.1ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414644"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1136180353,\"push_id\":30044835003,\"ref\":\"refs/heads/main\",\"head\":\"46369d9e6ef6e90152a03c44d84284b8db2fd8a9\",\"before\":\"33a9844281f855c1e87d090c8a56f351dc3bdadd\"}"], ["actor_id", 6], ["repository_id", 6], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.160578"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414648"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "108004519"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "108004519"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (0.2ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "108004519"], ["login", "daisy21000"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.165288"], ["updated_at", "2026-01-23 12:00:50.165288"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: ce594054-6eef-420d-8a38-87b9825b16cf) to Async(default) with arguments: :actor, 7
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1133662774"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1133662774"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1133662774"], ["name", "daisy21000/flask-pokedex"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.169026"], ["updated_at", "2026-01-23 12:00:50.169026"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: ec3ba341-185e-4753-91a6-02fead7607b9) to Async(default) with arguments: :repository, 7
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414648"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.1ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414648"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1133662774,\"push_id\":30044834999,\"ref\":\"refs/heads/main\",\"head\":\"e152c0ba7c25741cc9fc242710314bb513c9d47f\",\"before\":\"a8cc341586ef2a73c43bd39c6ac1a13be0463fac\"}"], ["actor_id", 7], ["repository_id", 7], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.171667"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414657"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "41898282"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 9326906d-812e-426f-aafa-c9bee8d50589) to Async(default) with arguments: :actor, 1
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1100101990"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1100101990"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1100101990"], ["name", "TopDataNBA1/nbapp"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.176489"], ["updated_at", "2026-01-23 12:00:50.176489"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 690b84aa-86e9-40c1-ba1d-019daded6bec) to Async(default) with arguments: :repository, 8
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414657"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.1ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414657"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1100101990,\"push_id\":30044834948,\"ref\":\"refs/heads/gh-pages\",\"head\":\"6c8faacb2cde944e17ae2fc8117c27feca4f9c4f\",\"before\":\"ac38083e8a56e6bbe9148caaa12b93545e5e4bf1\"}"], ["actor_id", 1], ["repository_id", 8], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.178412"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414659"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "41898282"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 468697bf-2872-48ca-8ed4-eeb0c228c943) to Async(default) with arguments: :actor, 1
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1090102484"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1090102484"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.3ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1090102484"], ["name", "stgacyg/zubo"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.186737"], ["updated_at", "2026-01-23 12:00:50.186737"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: b9d37c81-c371-4f4d-9c09-e1c84c384add) to Async(default) with arguments: :repository, 9
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414659"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.1ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414659"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1090102484,\"push_id\":30044835011,\"ref\":\"refs/heads/main\",\"head\":\"78676fcaddb4c9e3f83a4444e0d2e407c8db3927\",\"before\":\"c4f8a027d2890dba5847fb3482f0776ec429ae41\"}"], ["actor_id", 1], ["repository_id", 9], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.189370"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414661"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "255919585"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "255919585"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (0.1ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "255919585"], ["login", "asmr68560-dev"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.194211"], ["updated_at", "2026-01-23 12:00:50.194211"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: e9405228-9e9d-4b31-8bd4-83573c41b9ab) to Async(default) with arguments: :actor, 8
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1137625804"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1137625804"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1137625804"], ["name", "asmr68560-dev/fishing-bot"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.197288"], ["updated_at", "2026-01-23 12:00:50.197288"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 4e9b69b7-e8ff-4687-8511-2482b7153087) to Async(default) with arguments: :repository, 10
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414661"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.1ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414661"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1137625804,\"push_id\":30044834991,\"ref\":\"refs/heads/main\",\"head\":\"47b990f9f120804362493e1b6332e05c766705d9\",\"before\":\"9426f1c63f73f77d5ae0bbf398965b5f6f93a638\"}"], ["actor_id", 8], ["repository_id", 10], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.199795"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414662"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "73415603"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "73415603"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (0.1ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "73415603"], ["login", "whoyak"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.203681"], ["updated_at", "2026-01-23 12:00:50.203681"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: c346ced8-300e-4728-b6e5-8212cf20a038) to Async(default) with arguments: :actor, 9
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1122140563"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1122140563"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1122140563"], ["name", "whoyak/region-data-cache"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.207346"], ["updated_at", "2026-01-23 12:00:50.207346"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: e4618937-cf61-4647-81aa-f43be88fe623) to Async(default) with arguments: :repository, 11
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414662"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.1ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414662"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1122140563,\"push_id\":30044834965,\"ref\":\"refs/heads/main\",\"head\":\"6814ee75fc1119c1ea7706ff68a49f9b881ee90a\",\"before\":\"04b5d4f45282473cacd53950fd58abe9b5482d1a\"}"], ["actor_id", 9], ["repository_id", 11], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.209413"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414685"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "204574"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "204574"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (0.1ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "204574"], ["login", "guillaumebadin"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.213302"], ["updated_at", "2026-01-23 12:00:50.213302"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 915bddc8-7c45-4d16-9c43-cac0bae155da) to Async(default) with arguments: :actor, 10
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1140430149"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1140430149"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1140430149"], ["name", "beyond-scale-group/test-dynamic-test-runner"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.216280"], ["updated_at", "2026-01-23 12:00:50.216280"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: d797fecf-97a2-4b57-bc68-9c64bb4c0490) to Async(default) with arguments: :repository, 12
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414685"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.2ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414685"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1140430149,\"push_id\":30044835054,\"ref\":\"refs/heads/test/dtr-008-1769169346165\",\"head\":\"740355a2174308c6a9595eac2646b15d2090c9e2\",\"before\":\"7bb1df58b2b4ed47cd91d564f3e273ee31297dd2\"}"], ["actor_id", 10], ["repository_id", 12], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.220057"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414693"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "41898282"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 41995146-7fb1-4ccc-be4d-832df4f75621) to Async(default) with arguments: :actor, 1
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1095904036"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1095904036"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1095904036"], ["name", "Densigner/memzy-bot"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.225204"], ["updated_at", "2026-01-23 12:00:50.225204"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 7e1e0d81-a884-45e9-baca-02dfe8efc06c) to Async(default) with arguments: :repository, 13
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414693"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.1ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414693"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1095904036,\"push_id\":30044835100,\"ref\":\"refs/heads/main\",\"head\":\"16639096df9bac40e78b2a6134383f62d55fc320\",\"before\":\"46ca9340e12ff1148dcd23b32bfa1178ea7f42e2\"}"], ["actor_id", 1], ["repository_id", 13], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.227907"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414701"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "226155893"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "226155893"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (0.2ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "226155893"], ["login", "raghuwanshisujal7-byte"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.232065"], ["updated_at", "2026-01-23 12:00:50.232065"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: aa42fe91-96d1-4623-8b83-ca296dbbf99f) to Async(default) with arguments: :actor, 11
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1137521486"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1137521486"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1137521486"], ["name", "raghuwanshisujal7-byte/usa-tax-ai-backend"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.235425"], ["updated_at", "2026-01-23 12:00:50.235425"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 928031b8-23b1-4621-9569-ec933387203b) to Async(default) with arguments: :repository, 14
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414701"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.1ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414701"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1137521486,\"push_id\":30044835091,\"ref\":\"refs/heads/main\",\"head\":\"81fa274f8b0c83f1dd626eb20dc5eb4297b880d6\",\"before\":\"43b54b54399b1b290b548b3009c6afa62f0965f1\"}"], ["actor_id", 11], ["repository_id", 14], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.237665"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414711"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "68215251"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "68215251"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (0.1ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "68215251"], ["login", "vrcorp"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.241885"], ["updated_at", "2026-01-23 12:00:50.241885"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 0ee516c4-8014-4b59-ad23-5fadecea6535) to Async(default) with arguments: :actor, 12
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1117703620"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1117703620"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1117703620"], ["name", "vrcorp/captcha-list-vr"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.245072"], ["updated_at", "2026-01-23 12:00:50.245072"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: a2759d32-ac57-46b5-b291-507ec129b19e) to Async(default) with arguments: :repository, 15
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414711"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.1ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414711"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1117703620,\"push_id\":30044835120,\"ref\":\"refs/heads/main\",\"head\":\"2cd6413b32c1853b5074774d853432ebd16082c1\",\"before\":\"99fa1de4670895efd4ee0d9a07b488988f0a2196\"}"], ["actor_id", 12], ["repository_id", 15], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.247058"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414897"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "252448519"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "252448519"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (0.1ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "252448519"], ["login", "Official-Aryan-chauhan"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.250897"], ["updated_at", "2026-01-23 12:00:50.250897"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 97ae4e10-79bf-4cbb-a67b-f7b36558876e) to Async(default) with arguments: :actor, 13
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1133980629"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1133980629"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.2ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1133980629"], ["name", "Official-Aryan-chauhan/Alarm-clock-Python-project"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.255677"], ["updated_at", "2026-01-23 12:00:50.255677"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: f70fff6b-d451-480d-8686-fca03be115a3) to Async(default) with arguments: :repository, 16
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414897"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.7ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414897"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1133980629,\"push_id\":30044835225,\"ref\":\"refs/heads/main\",\"head\":\"5e781955f3e7a5b1bd7583ab4cf931b588c4f637\",\"before\":\"787ad342733073cc8d8330b6dd6038f33bad3c05\"}"], ["actor_id", 13], ["repository_id", 16], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.258623"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414919"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "40706663"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "40706663"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (0.1ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "40706663"], ["login", "emersonrafaels"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.265304"], ["updated_at", "2026-01-23 12:00:50.265304"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: fe66b068-6c4f-4277-9ca2-33d399cc0308) to Async(default) with arguments: :actor, 14
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1101382131"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1101382131"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1101382131"], ["name", "emersonrafaels/construct-cost-ai"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.269565"], ["updated_at", "2026-01-23 12:00:50.269565"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: d0c3b3f5-8be2-4ab4-952b-b567849382b2) to Async(default) with arguments: :repository, 17
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414919"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.1ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414919"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1101382131,\"push_id\":30044835180,\"ref\":\"refs/heads/main\",\"head\":\"e788c8d6eef8010fb9c4792adc3215153546ad0b\",\"before\":\"6d681081114af42bb860b4a6791fefb96400e9b5\"}"], ["actor_id", 14], ["repository_id", 17], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.271754"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414918"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "41898282"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 52eb8c60-28f9-416a-9cc5-989bbb743c52) to Async(default) with arguments: :actor, 1
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1136936214"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1136936214"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1136936214"], ["name", "EnzoKudro/Instagram-Reporter"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.277388"], ["updated_at", "2026-01-23 12:00:50.277388"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 3e5661d3-71f6-4913-8699-507394f24780) to Async(default) with arguments: :repository, 18
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414918"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.1ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414918"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1136936214,\"push_id\":30044835274,\"ref\":\"refs/heads/main\",\"head\":\"b7dcfaf390e97cca2c54a8740e198926ea4e2888\",\"before\":\"7bfcb98035dc8d8bc5d5550575af793da75deac0\"}"], ["actor_id", 1], ["repository_id", 18], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.279544"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414911"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "166895733"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "166895733"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (0.1ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "166895733"], ["login", "swa-runner-app[bot]"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.283593"], ["updated_at", "2026-01-23 12:00:50.283593"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: d6abdbb7-1f29-495f-be9b-6f5f64cb8892) to Async(default) with arguments: :actor, 15
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1140517521"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1140517521"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1140517521"], ["name", "static-web-apps-testing-org/swa4bed2772384c48809fc0883104d55f39"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.286788"], ["updated_at", "2026-01-23 12:00:50.286788"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: bd552f95-4a66-412b-adb5-95f500e5f7ec) to Async(default) with arguments: :repository, 19
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414911"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.2ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414911"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1140517521,\"push_id\":30044835285,\"ref\":\"refs/heads/prBranch\",\"head\":\"12bec48b5c97902d46a796ea2cc4dbb596f31611\",\"before\":\"82aa962d6b1ef8fc23eb90d3540dd759da26f0f0\"}"], ["actor_id", 15], ["repository_id", 19], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.290022"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414905"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "166895733"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 8742c5be-d7a7-4cf9-9ab8-c93e4b528efe) to Async(default) with arguments: :actor, 15
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1140525918"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1140525918"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1140525918"], ["name", "static-web-apps-testing-org/swa41ff6e6e502b462d84aa4f406077471a"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.294888"], ["updated_at", "2026-01-23 12:00:50.294888"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 5e2e9007-4ea0-44b5-b55a-97ea31066eb0) to Async(default) with arguments: :repository, 20
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414905"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.1ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414905"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1140525918,\"push_id\":30044835277,\"ref\":\"refs/heads/main\",\"head\":\"328692589b699a24e6c3e5386bffd25d5b2bff2c\",\"before\":\"0a2af8604be80e2d28613f8a8c7ca6d4b74faa3d\"}"], ["actor_id", 15], ["repository_id", 20], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.297757"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414903"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "124511749"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "124511749"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (0.2ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "124511749"], ["login", "ninirobot"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.301969"], ["updated_at", "2026-01-23 12:00:50.301969"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 8de8f98c-4bde-4047-868a-b14cbb58ffd2) to Async(default) with arguments: :actor, 16
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1138452313"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1138452313"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1138452313"], ["name", "ninirobot/NextChat"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.305136"], ["updated_at", "2026-01-23 12:00:50.305136"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 81822d32-a2bc-4344-93b7-2ee40250e00d) to Async(default) with arguments: :repository, 21
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414903"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.1ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414903"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1138452313,\"push_id\":30044835255,\"ref\":\"refs/heads/还原\",\"head\":\"9fc4faf314623f334c16ffdf66f4b16143e5b28a\",\"before\":\"f38e4c76126550aa408f0d604ed2d4dc8334bb07\"}"], ["actor_id", 16], ["repository_id", 21], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.307309"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414495"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "173319584"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "173319584"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (0.1ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "173319584"], ["login", "Pk917006"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.311396"], ["updated_at", "2026-01-23 12:00:50.311396"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: da42760c-ddf8-4063-994d-5b73ae84a9d5) to Async(default) with arguments: :actor, 17
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1123589577"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1123589577"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1123589577"], ["name", "Pk917006/meu_curriculo_flutter"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.315330"], ["updated_at", "2026-01-23 12:00:50.315330"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: d2653912-24c2-4720-bfff-6fe4821ebcee) to Async(default) with arguments: :repository, 22
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414495"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.1ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414495"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1123589577,\"push_id\":30044834880,\"ref\":\"refs/heads/main\",\"head\":\"37967451703000dfd5db8bb63f98283efda1b2d1\",\"before\":\"21deae7d0a3db5c6d293a1b7889d452519711908\"}"], ["actor_id", 17], ["repository_id", 22], ["created_at", "2026-01-23 11:55:47"], ["updated_at", "2026-01-23 12:00:50.317437"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414504"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "74414558"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "74414558"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (0.2ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "74414558"], ["login", "liusheng2020"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.321763"], ["updated_at", "2026-01-23 12:00:50.321763"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: e569df82-63d0-42b5-87ec-6f7076531eca) to Async(default) with arguments: :actor, 18
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1140523852"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1140523852"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1140523852"], ["name", "liusheng2020/chinese-chess-vscode"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.326223"], ["updated_at", "2026-01-23 12:00:50.326223"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 8b874bdc-88b8-453a-bfc8-5aff2676f6e7) to Async(default) with arguments: :repository, 23
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414504"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.3ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414504"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1140523852,\"push_id\":30044834900,\"ref\":\"refs/heads/main\",\"head\":\"a015b67c561144b7c5187ab08552074ddffc2f53\",\"before\":\"5f8efcffdac23b9f183079c5d2e40de142efc7c2\"}"], ["actor_id", 18], ["repository_id", 23], ["created_at", "2026-01-23 11:55:47"], ["updated_at", "2026-01-23 12:00:50.328356"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414505"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "41898282"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: bdaac633-8004-4ae9-8710-734fcec905aa) to Async(default) with arguments: :actor, 1
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1035403723"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1035403723"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1035403723"], ["name", "pafrantz/rallyiq"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.333677"], ["updated_at", "2026-01-23 12:00:50.333677"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 7546f095-9cb9-4591-a373-e90b05f43b85) to Async(default) with arguments: :repository, 24
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414505"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.1ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414505"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1035403723,\"push_id\":30044834906,\"ref\":\"refs/heads/main\",\"head\":\"3ff75ff53fd9a176e45bed32a2fca8ff627f7e59\",\"before\":\"d96f9e8eb33ddc80e91f9a39b1afa150460f24c0\"}"], ["actor_id", 1], ["repository_id", 24], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.336201"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414508"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "41898282"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: ec66220f-abc1-4f70-8768-6ef6da0d2de9) to Async(default) with arguments: :actor, 1
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.4ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1121707975"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1121707975"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1121707975"], ["name", "Sachin23991/news-dataset-pipeline"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.341416"], ["updated_at", "2026-01-23 12:00:50.341416"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: f5c883d7-17c9-4af9-82f9-a0cabe3561b8) to Async(default) with arguments: :repository, 25
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414508"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.2ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414508"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1121707975,\"push_id\":30044834818,\"ref\":\"refs/heads/main\",\"head\":\"9c3d51654318d06cbfc7eeb8b51ade0894e99174\",\"before\":\"9d73ce8cb6e2a69b26875602c88146401d1416dd\"}"], ["actor_id", 1], ["repository_id", 25], ["created_at", "2026-01-23 11:55:47"], ["updated_at", "2026-01-23 12:00:50.343886"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414511"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "181876841"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "181876841"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (0.1ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "181876841"], ["login", "Zahra-Ismail"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.348168"], ["updated_at", "2026-01-23 12:00:50.348168"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: c261a3da-05bd-4a67-8535-9035ba3feaf6) to Async(default) with arguments: :actor, 19
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1136676299"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1136676299"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1136676299"], ["name", "Zahra-Ismail/ecs-fargate-cicd-terraform"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.351319"], ["updated_at", "2026-01-23 12:00:50.351319"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: d66c6f87-a147-4887-b7ca-3ff05361d1e9) to Async(default) with arguments: :repository, 26
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414511"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.1ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414511"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1136676299,\"push_id\":30044834893,\"ref\":\"refs/heads/main\",\"head\":\"520ef46c827bca1d6dbefc7c26713e7d5843b896\",\"before\":\"ee375af4a4888c848bccc22f6633565cac0b43e3\"}"], ["actor_id", 19], ["repository_id", 26], ["created_at", "2026-01-23 11:55:47"], ["updated_at", "2026-01-23 12:00:50.353358"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414515"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "92228913"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "92228913"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (0.1ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "92228913"], ["login", "meikpiep"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.358263"], ["updated_at", "2026-01-23 12:00:50.358263"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 4cab1e1f-e0fb-4c11-af51-4668aeef914f) to Async(default) with arguments: :actor, 20
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "415397096"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "415397096"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "415397096"], ["name", "meikpiep/gauguin"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.361408"], ["updated_at", "2026-01-23 12:00:50.361408"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 9769d3fe-3873-4c1c-a983-61a0031c8110) to Async(default) with arguments: :repository, 27
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414515"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.2ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414515"], ["type", "PushEvent"], ["payload", "{\"repository_id\":415397096,\"push_id\":30044834904,\"ref\":\"refs/heads/main\",\"head\":\"b41b06810682def9015d715dd7f807791cc077b8\",\"before\":\"4683bb710caab9b2f4d3a6ddb14de09d2c225a25\"}"], ["actor_id", 20], ["repository_id", 27], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.364435"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414608"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "256652170"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "256652170"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Create (0.2ms)[0m  [1m[32mINSERT INTO "actors" ("github_id", "login", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "256652170"], ["login", "amadeapewe"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.368708"], ["updated_at", "2026-01-23 12:00:50.368708"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 0821a026-052d-4bbf-ad3a-4fa0f937475d) to Async(default) with arguments: :actor, 21
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1140115827"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1140115827"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1140115827"], ["name", "amadeapewe/amadeapewe-sieve"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.372032"], ["updated_at", "2026-01-23 12:00:50.372032"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: 6a8aa22c-7034-4543-add6-0d68b8c13a17) to Async(default) with arguments: :repository, 28
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414608"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.2ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414608"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1140115827,\"push_id\":30044835000,\"ref\":\"refs/heads/main\",\"head\":\"45a68a6d7ac29ecc9faed10eaaf11bfb0f15e001\",\"before\":\"c5a405e7848c533a2cd270f7769f4ad64b245b35\"}"], ["actor_id", 21], ["repository_id", 28], ["created_at", "2026-01-23 11:55:48"], ["updated_at", "2026-01-23 12:00:50.374205"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414524"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:52:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mActor Load (0.1ms)[0m  [1m[34mSELECT "actors".* FROM "actors" WHERE "actors"."github_id" = $1 LIMIT $2[0m  [["github_id", "41898282"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:57:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: da79f6c3-7d8f-4c39-a048-5c9896c11e64) to Async(default) with arguments: :actor, 1
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:60:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Load (0.1ms)[0m  [1m[34mSELECT "repositories".* FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1016714606"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "repositories" WHERE "repositories"."github_id" = $1 LIMIT $2[0m  [["github_id", "1016714606"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mRepository Create (0.1ms)[0m  [1m[32mINSERT INTO "repositories" ("github_id", "name", "details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["github_id", "1016714606"], ["name", "gaween/bookish"], ["details", "{}"], ["created_at", "2026-01-23 12:00:50.379770"], ["updated_at", "2026-01-23 12:00:50.379770"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:64:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Enqueued EnrichmentJob (Job ID: be7f2539-c33b-41c8-b474-7c3f053288d0) to Async(default) with arguments: :repository, 29
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] ↳ app/services/github_event_ingestion_service.rb:67:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "events" WHERE "events"."github_id" = $1 LIMIT $2[0m  [["github_id", "7749414524"], ["LIMIT", 1]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mEvent Create (0.1ms)[0m  [1m[32mINSERT INTO "events" ("github_id", "type", "payload", "actor_id", "repository_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["github_id", "7749414524"], ["type", "PushEvent"], ["payload", "{\"repository_id\":1016714606,\"push_id\":30044834850,\"ref\":\"refs/heads/master\",\"head\":\"6f3b0477e9c8b70294204f5c178abd56ac36ec48\",\"before\":\"4080e8f2227dac9fc73f0aa6d9ba17b175f90b00\"}"], ["actor_id", 1], ["repository_id", 29], ["created_at", "2026-01-23 11:55:47"], ["updated_at", "2026-01-23 12:00:50.381940"]]
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:70:in `block in create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b]   ↳ app/services/github_event_ingestion_service.rb:54:in `create_event'
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Rate Limit: 55 remaining. Resets at 2026-01-23 12:04:34 +0000
+[ActiveJob] [IngestionJob] [7c48ab61-8c84-43aa-a3d4-892800ebc73b] Performed IngestionJob (Job ID: 7c48ab61-8c84-43aa-a3d4-892800ebc73b) from Async(default) in 1896.65ms
+[ActiveJob] [EnrichmentJob] [b7c48240-dd05-418e-ab28-3a698b3bf2ed] Performed EnrichmentJob (Job ID: b7c48240-dd05-418e-ab28-3a698b3bf2ed) from Async(default) in 349.79ms
+[ActiveJob] [EnrichmentJob] [161976dd-8865-489a-9177-8e8273b9fbcd] Performed EnrichmentJob (Job ID: 161976dd-8865-489a-9177-8e8273b9fbcd) from Async(default) in 325.94ms
+[ActiveJob] [EnrichmentJob] [c7ba68f4-7666-4b7e-b9a2-58f94144b0cc] Performed EnrichmentJob (Job ID: c7ba68f4-7666-4b7e-b9a2-58f94144b0cc) from Async(default) in 276.51ms
+[ActiveJob] [EnrichmentJob] [77110672-a1cc-4ba1-b2b0-1731ed517e1b] Performed EnrichmentJob (Job ID: 77110672-a1cc-4ba1-b2b0-1731ed517e1b) from Async(default) in 233.53ms
+[ActiveJob] [EnrichmentJob] [2be2ff32-5e9e-478e-9a67-5aa588237de2] Performed EnrichmentJob (Job ID: 2be2ff32-5e9e-478e-9a67-5aa588237de2) from Async(default) in 303.07ms
+[ActiveJob] [EnrichmentJob] [766b30be-b98b-4ed8-ac5d-e327ebaa95fa] Performed EnrichmentJob (Job ID: 766b30be-b98b-4ed8-ac5d-e327ebaa95fa) from Async(default) in 284.59ms
+[ActiveJob] [EnrichmentJob] [cdfd8977-0396-4252-9597-86a748dae92a] Performed EnrichmentJob (Job ID: cdfd8977-0396-4252-9597-86a748dae92a) from Async(default) in 258.97ms
+[ActiveJob] [EnrichmentJob] [3f7293f5-e939-4517-8f87-3e4f34c09204] Performed EnrichmentJob (Job ID: 3f7293f5-e939-4517-8f87-3e4f34c09204) from Async(default) in 248.1ms

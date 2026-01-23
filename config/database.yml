@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV.fetch("POSTGRES_USER") { "postgres" } %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") { "password" } %>
+  host: <%= ENV.fetch("DB_HOST") { "db" } %>
+
+development:
+  <<: *default
+  database: active_storage_db
+
+test:
+  <<: *default
+  database: active_storage_test
+
+production:
+  <<: *default
+  database: active_storage_production
+  username: active_storage
+  password: <%= ENV["ACTIVE_STORAGE_DATABASE_PASSWORD"] %>
